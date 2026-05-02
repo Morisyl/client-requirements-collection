@@ -1,0 +1,49 @@
+// config.js — Edit this file to customise the system for any client
+const APP_CONFIG = {
+    // ─── COMPANY IDENTITY ────────────────────────────────────────────────────
+    company: {
+        name:       "Enolix Consultants",           // Appears in header, footer, page titles
+        tagline:    "Your Business Companion",     // Sub-header text
+        logoUrl:    "assets/logo.png",             // Path to logo image
+        faviconUrl: "assets/favicon.png",
+        year:       new Date().getFullYear(),      // Footer copyright year (auto)
+        legalNote:  "Protected under the Kenya Data Protection Act, 2019",
+    },
+
+    // ─── BACKEND ─────────────────────────────────────────────────────────────
+    api: {
+        baseUrl: "http://localhost:5000",          // ★ Change this for production deployment
+    },
+
+    // ─── THEME / COLOURS ─────────────────────────────────────────────────────
+    // These map to CSS custom properties injected into :root at startup
+    theme: {
+        colorPrimary:        "#1e3a5f",   // Navy — main brand colour
+        colorPrimaryLight:   "#2d5a8e",   // Lighter navy for hovers
+        colorAccent:         "#c9a84c",   // Gold accent
+        colorBackground:     "#f8f9fb",   // Page background
+        colorCard:           "#ffffff",   // Card/panel background
+        colorText:           "#1a1a2e",   // Body text
+        colorTextMuted:      "#6b7280",   // Placeholder / secondary text
+        colorSuccess:        "#16a34a",
+        colorWarning:        "#d97706",
+        colorDanger:         "#dc2626",
+        fontDisplay:         "'Playfair Display', Georgia, serif",  // Headings
+        fontBody:            "'Source Sans 3', sans-serif",         // Body text
+        fontMono:            "'JetBrains Mono', monospace",         // Reference numbers
+        borderRadius:        "10px",
+        shadowCard:          "0 2px 12px rgba(0,0,0,0.08)",
+    },
+
+    // ─── PRIVACY POLICY ───────────────────────────────────────────────────────
+    privacy: {
+        version:     "1.0",
+        lastUpdated: "10 February 2026",
+        summary:     "We collect only legally required information for business registration and compliance services in Kenya. Your data is processed in accordance with the Kenya Data Protection Act, 2019.",
+        fullText:    `## Privacy Policy\n\n...paste full policy here...`,
+    },
+
+    // ─── ADMIN EASTER EGG ────────────────────────────────────────────────────
+    // How many footer clicks trigger redirect to admin login
+    adminEasterEggClicks: 5,
+};

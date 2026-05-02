@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enolix Consultants | Secure Portal</title>
+    
+    <!-- Favicon (Assuming you kept the images folder) -->
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@600;700&family=Fira+Code:wght@500&display=swap" rel="stylesheet">
+    
+    <!-- Global Styles -->
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+
+    <!-- Toast Notifications Container -->
+    <div id="toast-container"></div>
+
+    <!-- The SPA Router will dynamically inject all pages here -->
+    <div id="app"></div>
+
+    <!-- 1. Load the Global Configuration -->
+    <script src="/config.js"></script>
+
+    <!-- 2. Kickstart the SPA Router -->
+    <script type="module" src="/js/router.js"></script>
+
+</body>
+</html>
