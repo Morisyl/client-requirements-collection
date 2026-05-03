@@ -8,8 +8,12 @@ const BASE = APP_CONFIG.api.baseUrl;
 async function request(method, path, body = null, isFormData = false) {
   const headers = {};
   const token = getToken();
+  
   if (token) headers['Authorization'] = `Bearer ${token}`;
   if (!isFormData) headers['Content-Type'] = 'application/json';
+  
+  // ★ ADD THIS EXACT LINE: Tells Ngrok to skip the browser warning screen
+  headers['ngrok-skip-browser-warning'] = '69420'; 
 
   const res = await fetch(`${BASE}${path}`, {
     method,
@@ -18,9 +22,16 @@ async function request(method, path, body = null, isFormData = false) {
   });
 
   if (res.status === 401) { clearToken(); window.location.hash = '#/admin/login'; }
-  const data = await res.json();
-  if (!res.ok) throw new Error(data.message || 'Request failed');
-  return data;
+  
+  // If Ngrok still blocks it, this will catch the HTML error instead of crashing
+  const contentType = res.headers.get("content-type");
+  if (contentType && contentType.indexOf("application/json") !== -1) {
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.message || 'Request failed');
+      return data;
+  } else {
+      throw new Error('Received non-JSON response. Check Ngrok/CORS.');
+  }
 }
 
 // ─── PUBLIC ENDPOINTS ─────────────────────────────────────────────────────
