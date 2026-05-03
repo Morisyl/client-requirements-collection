@@ -150,17 +150,19 @@ export const SubmissionsList = {
         });
 
         // Event Delegation for clicking a row to view details
-        tbody.addEventListener('click', (e) => {
-            // Check if they clicked the view button (or an icon inside it)
-            const viewBtn = e.target.closest('.view-btn'); 
-            
-            if (viewBtn) {
-                // Read the ID we hid inside the button's HTML
-                const submissionId = viewBtn.getAttribute('data-id'); 
+        this.tbody.addEventListener('click', (e) => {
+            tbody.addEventListener('click', (e) => {
+                // Check if they clicked the view button (or an icon inside it)
+                const viewBtn = e.target.closest('.view-btn'); 
                 
-                // Push the actual string ID to the URL!
-                window.location.hash = `#/admin/submissions/${submissionId}`; 
-            }
+                if (viewBtn) {
+                    // Read the ID we hid inside the button's HTML
+                    const submissionId = viewBtn.getAttribute('data-id'); 
+                    
+                    // Push the actual string ID to the URL!
+                    window.location.hash = `#/admin/submissions/${submissionId}`; 
+                }
+            });
         });
     },
 
