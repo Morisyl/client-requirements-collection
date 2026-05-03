@@ -155,7 +155,7 @@ export const SubmissionsList = {
             if (row) {
                 const id = row.getAttribute('data-id');
                 // Navigate to the detail view hash route
-                window.location.hash = `#/admin/submissions/${id}`;
+                window.location.hash = `#/admin/submissions/${submission.id}`;
             }
         });
     },

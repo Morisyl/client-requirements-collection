@@ -22,6 +22,8 @@ process.on('uncaughtException', (err) => {
 
 // 2. Initialize Express Application
 const app = express();
+// Tell Express to trust the reverse proxy (Ngrok/Render) so rate limiting works correctly
+app.set('trust proxy', 1);
 
 // 3. Global Middleware Stack
 
