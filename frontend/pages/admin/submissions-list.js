@@ -150,28 +150,28 @@ export const SubmissionsList = {
         });
 
         // Event Delegation for clicking a row to view details
-        this.tbody.addEventListener('click', (e) => {
-            attachListeners: () => {
-                // 1. FIND THE TBODY FIRST (Update the selector if your table has a specific ID)
-                const tbody = document.querySelector('table tbody'); 
-                // Pro-tip: If your table has an ID, it's safer to do: document.querySelector('#my-table-id tbody');
+        attachListeners: () => {
+            // 1. Find the tbody
+            const tbody = document.getElementById('submissions-tbody'); 
 
-                // 2. ADD A SAFETY CHECK (So it doesn't crash if the table isn't on the screen yet)
-                if (!tbody) return;
-                tbody.addEventListener('click', (e) => {
-                    // Check if they clicked the view button (or an icon inside it)
-                    const viewBtn = e.target.closest('.view-btn'); 
-                    
-                    if (viewBtn) {
-                        // Read the ID we hid inside the button's HTML
-                        const submissionId = viewBtn.getAttribute('data-id'); 
-                        
-                        // Push the actual string ID to the URL!
-                        window.location.hash = `#/admin/submissions/${submissionId}`; 
-                    }
-                });
-            }    
-        });
+            // 2. Safety check
+            if (!tbody) return;
+
+            // 3. Attach the row click listener
+            tbody.addEventListener('click', (e) => {
+                // Look for the closest clicked row with the class 'sub-row'
+                const clickedRow = e.target.closest('.sub-row'); 
+                
+                if (clickedRow) {
+                    // Grab the ID right off the row itself!
+                    const submissionId = clickedRow.getAttribute('data-id'); 
+                    window.location.hash = `#/admin/submissions/${submissionId}`; 
+                }
+            });
+            
+            // ... your refresh button listener, search filter listeners, etc ...
+        }; // Make sure there is a comma here if there are other functions below it!
+    
     },
 
     /**
