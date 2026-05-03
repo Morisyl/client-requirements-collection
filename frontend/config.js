@@ -13,7 +13,7 @@ export const APP_CONFIG = {
 
     // ─── BACKEND ─────────────────────────────────────────────────────────────
     api: {
-        baseUrl: "http://localhost:5000",          // ★ Change this for production deployment
+        baseUrl: "https://carbonic-unterrified-journee.ngrok-free.dev",          // ★ Change this for production deployment
     },
 
     // ─── THEME / COLOURS ─────────────────────────────────────────────────────
