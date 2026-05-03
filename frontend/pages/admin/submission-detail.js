@@ -69,8 +69,8 @@ export const SubmissionDetail = {
     /**
      * Renders the shell and injects dynamic components
      */
-    async render(submissionId) {
-        this.state.id = submissionId;
+    async render({ id } = {}) {
+        this.state.id = id;
 
         return `
             <div class="submission-detail-module" style="padding-bottom: 4rem;">

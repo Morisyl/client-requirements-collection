@@ -112,30 +112,26 @@ export const SubmissionsList = {
     },
 
     attachListeners() {
-        // Debounced Search (waits 500ms after user stops typing before calling API)
         let debounceTimer;
         this.searchInput.addEventListener('input', (e) => {
             clearTimeout(debounceTimer);
             debounceTimer = setTimeout(() => {
                 this.state.search = e.target.value;
-                this.state.page = 1; // Reset to page 1 on new search
+                this.state.page = 1;
                 this.loadData();
             }, 500);
         });
 
-        // Status Filter Change
         this.statusSelect.addEventListener('change', (e) => {
             this.state.status = e.target.value;
             this.state.page = 1;
             this.loadData();
         });
 
-        // Refresh Button
         document.getElementById('btn-refresh').addEventListener('click', () => {
             this.loadData();
         });
 
-        // Pagination Previous
         this.btnPrev.addEventListener('click', () => {
             if (this.state.page > 1) {
                 this.state.page--;
@@ -143,35 +139,19 @@ export const SubmissionsList = {
             }
         });
 
-        // Pagination Next
         this.btnNext.addEventListener('click', () => {
             this.state.page++;
             this.loadData();
         });
 
-        // Event Delegation for clicking a row to view details
-        attachListeners: () => {
-            // 1. Find the tbody
-            const tbody = document.getElementById('submissions-tbody'); 
-
-            // 2. Safety check
-            if (!tbody) return;
-
-            // 3. Attach the row click listener
-            tbody.addEventListener('click', (e) => {
-                // Look for the closest clicked row with the class 'sub-row'
-                const clickedRow = e.target.closest('.sub-row'); 
-                
-                if (clickedRow) {
-                    // Grab the ID right off the row itself!
-                    const submissionId = clickedRow.getAttribute('data-id'); 
-                    window.location.hash = `#/admin/submissions/${submissionId}`; 
-                }
-            });
-            
-            // ... your refresh button listener, search filter listeners, etc ...
-        }; // Make sure there is a comma here if there are other functions below it!
-    
+        // ✅ FIXED: Real click delegation — was dead code before
+        this.tbody.addEventListener('click', (e) => {
+            const clickedRow = e.target.closest('.sub-row');
+            if (clickedRow) {
+                const submissionId = clickedRow.getAttribute('data-id');
+                window.location.hash = `#/admin/submissions/${submissionId}`;
+            }
+        });
     },
 
     /**
@@ -252,7 +232,7 @@ export const SubmissionsList = {
         if (!meta) return;
 
         const totalPages = meta.total_pages || 1;
-        const totalItems = meta.total || 0;
+        const totalItems = meta.total_records || 0;
 
         this.pageInfo.innerHTML = `Showing page <strong>${this.state.page}</strong> of <strong>${totalPages}</strong> (${totalItems} total)`;
 
