@@ -43,6 +43,15 @@ router.get('/submissions',
 );
 
 /**
+ * GET /api/admin/submissions/:id
+ * Retrieves a single submission by its ID with full details.
+ */
+router.get('/submissions/:id', 
+    sanitize, 
+    adminController.getSubmissionById
+);
+
+/**
  * PATCH /api/admin/submissions/:id/status
  * Updates the lifecycle status of a submission (e.g., pending -> in_review -> completed).
  */

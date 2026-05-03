@@ -134,6 +134,43 @@ const getAllSubmissions = async (req, res, next) => {
 };
 
 /**
+ * GET /api/admin/submissions/:id
+ * Retrieves a single submission by ID with full details.
+ */
+const getSubmissionById = async (req, res, next) => {
+    try {
+        const submissionId = req.params.id;
+
+        if (!submissionId) {
+            const error = new Error('Submission ID is required.');
+            error.statusCode = 400;
+            return next(error);
+        }
+
+        // Fetch the submission from Supabase
+        const { data, error: dbError } = await supabaseAdmin
+            .from('submissions')
+            .select('*')
+            .eq('id', submissionId)
+            .single();
+
+        if (dbError || !data) {
+            const error = new Error('Submission not found.');
+            error.statusCode = 404;
+            return next(error);
+        }
+
+        res.status(200).json({
+            success: true,
+            data: data
+        });
+
+    } catch (error) {
+        next(error);
+    }
+};
+
+/**
  * PATCH /api/admin/submissions/:id/status
  * Updates submission status with strict state-machine validation.
  */
@@ -301,6 +338,7 @@ const removeSubmissionTag = async (req, res, next) => {
 module.exports = {
     login,
     getAllSubmissions,
+    getSubmissionById,
     updateSubmissionStatus,
     updateSubmissionNotes,
     addSubmissionTag,

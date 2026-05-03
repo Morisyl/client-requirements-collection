@@ -150,12 +150,16 @@ export const SubmissionsList = {
         });
 
         // Event Delegation for clicking a row to view details
-        this.tbody.addEventListener('click', (e) => {
-            const row = e.target.closest('.sub-row');
-            if (row) {
-                const id = row.getAttribute('data-id');
-                // Navigate to the detail view hash route
-                window.location.hash = `#/admin/submissions/${submission.id}`;
+        tbody.addEventListener('click', (e) => {
+            // Check if they clicked the view button (or an icon inside it)
+            const viewBtn = e.target.closest('.view-btn'); 
+            
+            if (viewBtn) {
+                // Read the ID we hid inside the button's HTML
+                const submissionId = viewBtn.getAttribute('data-id'); 
+                
+                // Push the actual string ID to the URL!
+                window.location.hash = `#/admin/submissions/${submissionId}`; 
             }
         });
     },
